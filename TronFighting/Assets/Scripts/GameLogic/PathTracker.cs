@@ -8,7 +8,6 @@ public class PathTracker : MonoBehaviour, ITrackable
     [SerializeField] private LineRenderer _lineRenderer;
     private List<Vector3> points;
     private Vector3 currentPoint;
-    private Vector3 startPoint;
     private Vector3 currentDirection;
 
     void Start()
@@ -18,7 +17,6 @@ public class PathTracker : MonoBehaviour, ITrackable
 
     public Vector3[] CalculatePath(Vector3 startPoint, Vector3 direction, int reflections, float maxDistance)
     {
-        Debug.Log("Im here");
         points = new List<Vector3>();
         currentPoint = startPoint;
         currentDirection = direction.normalized;
