@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
     private ICharacterState currentState;
 
     public MovementState movementState;
@@ -13,7 +14,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         movementState = new MovementState(transform, moveSpeed);
+        animator = GetComponent<Animator>();
         SwitchState(movementState);
+
     }
 
     void Update()
