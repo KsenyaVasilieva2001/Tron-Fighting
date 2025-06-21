@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    [Header("Inputs")]
+    public Vector2 MovementInput { get; private set; }
+    public Vector2 MouseDelta { get; private set; }
+
+    [Header("Key inputs")]
     public KeyCode heavyKey;
     public KeyCode lightKey;
     public KeyCode kickKey;
@@ -54,7 +57,7 @@ public class InputHandler : MonoBehaviour
     {
         CheckAttack();
         InputAttack();
-        Move();
+        MoveUpdate();
         KickEnemy();
     }
 
@@ -182,8 +185,13 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private void Move()
+    
+    private void MoveUpdate()
     {
+        MovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        MouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
+        /*
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         if (inputDirection.magnitude > 0)
         {
@@ -198,7 +206,9 @@ public class InputHandler : MonoBehaviour
             playerController.animator.SetFloat("Speed", inputDirection.magnitude);
             moveCommand.Execute();
         }
+        */
     }
+      
 
     private void KickEnemy()
     {

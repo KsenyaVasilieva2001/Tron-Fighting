@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class MoveCommand : MonoBehaviour, IControllable
 {
     private MovementState movementState;
@@ -18,3 +19,4 @@ public class MoveCommand : MonoBehaviour, IControllable
         movementState.SetDirection(direction);
     }
 }
+*/

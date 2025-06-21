@@ -5,24 +5,33 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    private ICharacterState currentState;
     public UIController uiController;
     public Enemy currentEnemy;
 
-    public MovementState movementState;
+    private PlayerMovement movement;
+    private PlayerRotation rotation;
+
+    //  public MovementState movementState;
 
     [SerializeField] private float moveSpeed;
 
+    void Awake()
+    {
+        movement = GetComponent<PlayerMovement>();
+        rotation = GetComponent<PlayerRotation>();
+    }
+
     void Start()
     {
-        movementState = new MovementState(transform, moveSpeed);
+        // movementState = new MovementState(transform, moveSpeed);
         animator = GetComponent<Animator>();
-        SwitchState(movementState);
+        // SwitchState(movementState);
     }
 
     void Update()
     {
-        currentState.Execute();
+        movement.Move();
+        rotation.Rotate();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,13 +41,5 @@ public class PlayerController : MonoBehaviour
             currentEnemy = enemy;
             uiController.SetEnemyUI(enemy.data);
         }
-    }
-
-    public void SwitchState(ICharacterState newState)
-    {
-        if (currentState != null)
-            currentState.Exit();
-        currentState = newState;
-        currentState.Enter();
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class MovementState : MonoBehaviour, ICharacterState
 {
     [SerializeField] private Transform characterTransform; 
@@ -32,3 +33,4 @@ public class MovementState : MonoBehaviour, ICharacterState
         direction = Vector3.zero;
     }
 }
+*/
