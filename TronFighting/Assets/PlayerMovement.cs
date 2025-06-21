@@ -28,6 +28,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = new Vector3(input.MovementInput.x, 0, input.MovementInput.y);
         move = playerCameraTransform.forward * move.z + playerCameraTransform.right * move.x;
         move.y = 0;
-        characterController.Move(move.normalized * moveSpeed * Time.deltaTime);
+
+        // ЧЧЧ гравитаци€ ЧЧЧ
+        if (characterController.isGrounded)
+        {
+            // при касании земли даЄм небольшой Ђприжимающийї импульс,
+            // чтобы точно оставатьс€ на землеs
+            verticalVelocity = -2f;
+        }
+        else
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+
+        Vector3 velocity = move.normalized * moveSpeed;
+        velocity.y = verticalVelocity;
+        characterController.Move(velocity * Time.deltaTime);
+        //characterController.Move(move.normalized * moveSpeed * Time.deltaTime);
     }
 }
