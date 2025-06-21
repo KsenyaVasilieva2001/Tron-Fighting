@@ -53,6 +53,7 @@ public class Combo
 
     public ComboInput GetCurrentComboInput()
     {
+        if (currInput >= inputs.Count) return null;
         return inputs[currInput];
     }
 

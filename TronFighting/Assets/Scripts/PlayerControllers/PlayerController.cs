@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     private ICharacterState currentState;
+    public UIController uiController;
+    public Enemy currentEnemy;
 
     public MovementState movementState;
 
@@ -16,12 +18,20 @@ public class PlayerController : MonoBehaviour
         movementState = new MovementState(transform, moveSpeed);
         animator = GetComponent<Animator>();
         SwitchState(movementState);
-
     }
 
     void Update()
     {
         currentState.Execute();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Enemy enemy))
+        {
+            currentEnemy = enemy;
+            uiController.SetEnemyUI(enemy.data);
+        }
     }
 
     public void SwitchState(ICharacterState newState)
