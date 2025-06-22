@@ -11,6 +11,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private float minPitch = -30f;
     [SerializeField] private float maxPitch = 60f;
 
+    private bool isOverlapped = true;
     private float yaw;
     private float pitch;
 
@@ -21,11 +22,17 @@ public class ThirdPersonCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
-
         Vector3 direction = rotation * new Vector3(0, 0, -distance);
         Vector3 desiredPosition = target.position + Vector3.up * offset.y + Vector3.right * offset.x + direction;
 
-        transform.position = desiredPosition;
+        isOverlapped = CheckOverviewOverlap(target.position, desiredPosition);
+        if (!isOverlapped) transform.position = desiredPosition;
+
         transform.LookAt(target.position + Vector3.up * offset.y);
+    }
+
+    private bool CheckOverviewOverlap(Vector3 player, Vector3 desiredCamPos)
+    {
+        return Physics.Linecast(player, desiredCamPos);
     }
 }

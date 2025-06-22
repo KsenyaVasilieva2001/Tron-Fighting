@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour
         // SwitchState(movementState);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        movement.Move();
-        rotation.Rotate();
+      // movement.Move();
+       //rotation.Rotate();
     }
 
     private void OnTriggerEnter(Collider other)
