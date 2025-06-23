@@ -63,6 +63,11 @@ public class CharacterMovement : MonoBehaviour
         controller.Move(move * Time.deltaTime * 2);
     }
 
+    private void Jump()
+    {
+
+    }
+
     private void UpdateSpeed()
     {
         if (useCharacterForward)
