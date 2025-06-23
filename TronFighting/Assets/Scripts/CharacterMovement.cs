@@ -46,6 +46,7 @@ public class CharacterMovement : MonoBehaviour
 
         speed = Mathf.Clamp(speed, 0f, 1f);
         speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
+        Debug.Log("Speed: " + speed);
         anim.SetFloat("Speed", speed);
 
         if (input.y < 0f && useCharacterForward)

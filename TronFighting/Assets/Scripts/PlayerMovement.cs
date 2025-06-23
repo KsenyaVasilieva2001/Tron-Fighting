@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(InputHandler))]
+[RequireComponent(typeof(CharacterController), typeof(FightController))]
 public class PlayerMovement : MonoBehaviour
 {
    [Header("Params")]
@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
 
    private CharacterController characterController;
    [SerializeField] private Transform playerCameraTransform;
-   private InputHandler input;
+   private FightController input;
    [SerializeField] private Animator animator;
    [SerializeField] private float posY = 0;
 
    void Awake()
    {
        characterController = GetComponent<CharacterController>();
-       input = GetComponent<InputHandler>();
+       input = GetComponent<FightController>();
        animator = GetComponent<Animator>();
    }
    public void Move()
