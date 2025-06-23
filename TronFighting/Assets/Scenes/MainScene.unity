@@ -1148,7 +1148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &646337425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6857278506230796786, guid: 4760f79516c330f4a9c2b0cf85976555, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4756975
+      value: 3.4756331
       objectReference: {fileID: 0}
     - target: {fileID: 6857278506230796786, guid: 4760f79516c330f4a9c2b0cf85976555, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2174,9 +2174,9 @@ Transform:
   m_Father: {fileID: 597509250}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1796993587 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3230848091813567918, guid: 7a0ebe0953f9a7646a29495e46405b0c, type: 3}
+--- !u!20 &1796993591 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3230848091813567921, guid: 7a0ebe0953f9a7646a29495e46405b0c, type: 3}
   m_PrefabInstance: {fileID: 1888534941}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1888534941
@@ -2192,7 +2192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3230848091813567918, guid: 7a0ebe0953f9a7646a29495e46405b0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4756975
+      value: 3.4756331
       objectReference: {fileID: 0}
     - target: {fileID: 3230848091813567918, guid: 7a0ebe0953f9a7646a29495e46405b0c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2655,51 +2655,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e65b89183fbdd945b81b604aa989979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 1796993591}
   firePoint: {fileID: 6279625179316656774}
   reflections: 3
   maxDistance: 20
   pathTracker: {fileID: 6279625179484366208}
   diskPrefab: {fileID: 3744872701780373281, guid: 411f9623067e5ce408efebbdea684f2c, type: 3}
---- !u!114 &454617811281559788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621659268352131118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce891d2555542dc438e4a1024871a5a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heavyKey: 0
-  lightKey: 0
-  kickKey: 0
-  blockKey: 0
-  heavyAttack:
-    name: 
-    duration: 0
-  lightAttack:
-    name: 
-    duration: 0
-  kickAttack:
-    name: 
-    duration: 0
-  block:
-    name: 
-    duration: 0
-  combos:
-  - inputs: []
-    comboAttack:
-      name: 
-      duration: 0
-    onInput:
-      m_PersistentCalls:
-        m_Calls: []
-  currentCombos: 
-  comboGap: 0.2
-  playerController: {fileID: 6621659268352131119}
 --- !u!95 &454617811281559790
 Animator:
   serializedVersion: 4
@@ -7195,12 +7156,10 @@ GameObject:
   - component: {fileID: 5813879564408789652}
   - component: {fileID: 454617811281559790}
   - component: {fileID: 454617811281559762}
-  - component: {fileID: 454617811281559788}
   - component: {fileID: 6621659268352131119}
   - component: {fileID: 6621659268352131123}
   - component: {fileID: 6621659268352131125}
-  - component: {fileID: 6621659268352131124}
-  - component: {fileID: 6621659268352131126}
+  - component: {fileID: 6621659268352131127}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -7242,23 +7201,6 @@ MonoBehaviour:
   gravity: -9.81
   sprintJoystick: 332
   sprintKeyboard: 32
---- !u!114 &6621659268352131124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621659268352131118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79f1efeb1263ce4aa39a51b278c7263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  gravity: 9.81
-  playerCameraTransform: {fileID: 5813879564408789652}
-  animator: {fileID: 454617811281559790}
-  posY: 0
 --- !u!143 &6621659268352131125
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7277,7 +7219,7 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 12, z: 0}
---- !u!114 &6621659268352131126
+--- !u!114 &6621659268352131127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7286,11 +7228,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6621659268352131118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614e514003a130f4eb5928f188314e32, type: 3}
+  m_Script: {fileID: 11500000, guid: 973b55fbba780bb448baaf9b9ecb7c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 10
-  playerCameraTransform: {fileID: 1796993587}
+  heavyKey: 0
+  lightKey: 0
+  kickKey: 0
+  blockKey: 0
+  heavyAttack:
+    name: 
+    duration: 0
+  lightAttack:
+    name: 
+    duration: 0
+  kickAttack:
+    name: 
+    duration: 0
+  block:
+    name: 
+    duration: 0
+  combos: []
+  currentCombos: 
+  comboGap: 0.2
+  playerController: {fileID: 6621659268352131119}
 --- !u!4 &6649757653867522565
 Transform:
   m_ObjectHideFlags: 0

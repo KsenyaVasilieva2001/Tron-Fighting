@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerThrowController : MonoBehaviour
+public class ThrowController : MonoBehaviour
 {
     [SerializeField] Camera playerCamera;
     [SerializeField] public Transform firePoint;
