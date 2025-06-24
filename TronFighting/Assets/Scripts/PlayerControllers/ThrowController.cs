@@ -43,6 +43,7 @@ public class ThrowController : MonoBehaviour
             isHolding = false;
             anim.SetBool("IsAimToThrow", false);
             anim.SetTrigger("Throw");
+            pathTracker.Clear();
             //ThrowDisk();
         }
         UpdateFirePointTransform();
