@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 move = (transform.forward * input.y + transform.right * input.x).normalized;
+        Vector3 move = targetDirection.normalized;
         move = UseGravity(move);
         controller.Move(move * Time.deltaTime * 2);
     }
@@ -70,11 +70,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        if (useCharacterForward)
-            speed = Mathf.Abs(input.x) + input.y;
-        else
-            speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
-
+        speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
+       
         speed = Mathf.Clamp(speed, 0f, 1f);
         speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
         Debug.Log("Speed: " + speed);
