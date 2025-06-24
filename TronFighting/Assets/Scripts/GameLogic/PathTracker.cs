@@ -6,13 +6,16 @@ using UnityEngine;
 public class PathTracker : MonoBehaviour, ITrackable
 {
     [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private float lineWidth = 0.1f;
     private List<Vector3> points;
     private Vector3 currentPoint;
     private Vector3 currentDirection;
 
+
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        SetWidth(0.1f);
     }
 
     public Vector3[] CalculatePath(Vector3 startPoint, Vector3 direction, int reflections, float maxDistance)
@@ -46,6 +49,17 @@ public class PathTracker : MonoBehaviour, ITrackable
     {
         _lineRenderer.positionCount = points.Length;
         _lineRenderer.SetPositions(points);
+    }
+
+    public void SetWidth(float width) 
+    {
+        _lineRenderer.startWidth = width;
+        _lineRenderer.endWidth = width;
+    }
+
+    public void SetColor(Color color)
+    {
+        _lineRenderer.material.color = color;
     }
 
     public void Clear()

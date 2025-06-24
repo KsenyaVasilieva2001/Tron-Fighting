@@ -85,6 +85,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1092031169665287787}
     m_Modifications:
+    - target: {fileID: -8822551737288223496, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f93e4453c6693e64fb49000407b3a20f, type: 2}
     - target: {fileID: -8679921383154817045, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -141,6 +145,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3227268231472990092, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3320bf32c234d9e4082acf0d0895b462, type: 2}
     - target: {fileID: -1929537949986053383, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -157,6 +165,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: torn legacy disk v2-0
       objectReference: {fileID: 0}
+    - target: {fileID: 963683147241131712, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f93e4453c6693e64fb49000407b3a20f, type: 2}
     - target: {fileID: 1704860519164530681, guid: 3fc929203da5f1d4fb328ba509d8b767, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

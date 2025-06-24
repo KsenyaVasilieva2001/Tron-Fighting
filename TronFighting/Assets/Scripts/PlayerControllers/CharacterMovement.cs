@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 //Вынести логику анимаций в другой класс
+//Вынести логику в Input handler
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour
@@ -12,24 +13,22 @@ public class CharacterMovement : MonoBehaviour
     public bool lockToCameraForward = false;
     public float turnSpeed = 10f;
     public float gravity = -9.81f;
-    public KeyCode sprintJoystick = KeyCode.JoystickButton2;
-    public KeyCode sprintKeyboard = KeyCode.Space;
+    public KeyCode jumpKey = KeyCode.Space;
 
-    private float turnSpeedMultiplier;
-    private float speed = 0f;
-    private float direction = 0f;
-    private bool isSprinting = false;
-    private Animator anim;
-    private Vector3 targetDirection;
-    private Vector2 input;
-    private Quaternion freeRotation;
-    private Camera mainCamera;
-    private float velocity;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float runSpeed = 3f;
 
     private CharacterController controller;
-    private float verticalVelocity;
+    private Animator anim;
+    private Camera mainCamera;
 
-    [SerializeField] private float runSpeed = 3f;
+    private Vector2 input;
+    private Vector3 targetDirection;
+    private Quaternion freeRotation;
+    private float turnSpeedMultiplier;
+    private float speed;
+    private float velocity;
+    private float verticalVelocity;
 
     void Start()
     {
@@ -42,46 +41,10 @@ public class CharacterMovement : MonoBehaviour
     {
         GetInput();
         UpdateSpeed();
-
-        /*
-        if (input.y < 0f && useCharacterForward)
-            direction = input.y;
-        else
-            direction = 0f;
-        */
-
-        //anim.SetFloat("Direction", direction);
-
-        //anim.SetFloat("Speed", smoothSpeed);
+       //Jump();
         UpdateTargetDirection();
-        if (input != Vector2.zero && targetDirection.magnitude > 0.1f)
-        {
-            UpdateRotation();
-        }
+        UpdateRotation();
         Move();
-    }
-
-    private void Move()
-    {
-        Vector3 move = targetDirection.normalized;
-        move = UseGravity(move);
-        controller.Move(move * Time.deltaTime * runSpeed);
-    }
-
-    private void Jump()
-    {
-
-    }
-
-    private void UpdateSpeed()
-    {
-        speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
-       
-        speed = Mathf.Clamp(speed, 0f, 1f);
-        speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
-        Debug.Log("Speed: " + speed);
-        anim.SetFloat("Speed", speed);
-        //anim.speed = runSpeed;
     }
 
     private void GetInput()
@@ -90,56 +53,67 @@ public class CharacterMovement : MonoBehaviour
         input.y = Input.GetAxis("Vertical");
     }
 
-    private Vector3 UseGravity(Vector3 move)
+    private void UpdateSpeed()
+    {
+        speed = Mathf.Clamp01(Mathf.Abs(input.x) + Mathf.Abs(input.y));
+        speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
+        anim.SetFloat("Speed", speed);
+    }
+
+    private void Jump()
     {
         if (controller.isGrounded)
         {
-            verticalVelocity = -1f; // небольшая притягивающая сила, чтобы контроллер "прилипал" к земле
+            if (verticalVelocity < 0f)
+                verticalVelocity = -1f;
+
+            if (Input.GetKeyDown(jumpKey))
+            {
+                verticalVelocity = Mathf.Sqrt(jumpForce * -2f * gravity);
+                anim.SetTrigger("Jump");
+            }
         }
         else
         {
             verticalVelocity += gravity * Time.deltaTime;
         }
-        move.y = verticalVelocity;
-        return move;
     }
 
-    private void UpdateRotation()
-    {
-        Vector3 lookDirection = targetDirection.normalized;
-        freeRotation = Quaternion.LookRotation(lookDirection, transform.up);
-        var diferenceRotation = freeRotation.eulerAngles.y - transform.eulerAngles.y;
-        var eulerY = transform.eulerAngles.y;
-
-        if (diferenceRotation < 0 || diferenceRotation > 0) eulerY = freeRotation.eulerAngles.y;
-        var euler = new Vector3(0, eulerY, 0);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), turnSpeed * turnSpeedMultiplier * Time.deltaTime);
-    }
-
-    public virtual void UpdateTargetDirection()
+    private void UpdateTargetDirection()
     {
         if (!useCharacterForward)
         {
             turnSpeedMultiplier = 1f;
-            var forward = mainCamera.transform.TransformDirection(Vector3.forward);
-            forward.y = 0;
-
-            //get the right-facing direction of the referenceTransform
-            var right = mainCamera.transform.TransformDirection(Vector3.right);
-
-            // determine the direction the player will face based on input and the referenceTransform's right and forward directions
+            Vector3 forward = mainCamera.transform.forward;
+            forward.y = 0f;
+            Vector3 right = mainCamera.transform.right;
             targetDirection = input.x * right + input.y * forward;
         }
         else
         {
             turnSpeedMultiplier = 0.2f;
-            var forward = transform.TransformDirection(Vector3.forward);
-            forward.y = 0;
-
-            //get the right-facing direction of the referenceTransform
-            var right = transform.TransformDirection(Vector3.right);
+            Vector3 forward = transform.forward;
+            forward.y = 0f;
+            Vector3 right = transform.right;
             targetDirection = input.x * right + Mathf.Abs(input.y) * forward;
         }
+    }
+
+    private void UpdateRotation()
+    {
+        if (targetDirection.magnitude < 0.1f)
+            return;
+
+        Vector3 lookDirection = targetDirection.normalized;
+        freeRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        float eulerY = Mathf.LerpAngle(transform.eulerAngles.y, freeRotation.eulerAngles.y, turnSpeed * turnSpeedMultiplier * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, eulerY, 0);
+    }
+
+    private void Move()
+    {
+        Vector3 horizontalMove = targetDirection.normalized * runSpeed;
+        Vector3 move = new Vector3(horizontalMove.x, verticalVelocity, horizontalMove.z);
+        controller.Move(move * Time.deltaTime);
     }
 }

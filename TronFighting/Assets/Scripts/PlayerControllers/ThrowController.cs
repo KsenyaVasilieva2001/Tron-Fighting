@@ -18,6 +18,12 @@ public class ThrowController : MonoBehaviour
     private Vector3 direction;
     private Vector3[] path;
 
+    [Header("Hand Bone")]
+    [SerializeField] private Transform handBone;
+    private bool isHolding = false;
+
+    [SerializeField] private Animator anim;
+
     private void Start()
     {
         _diskFactory = new DiskFactory(diskPrefab);
@@ -27,13 +33,32 @@ public class ThrowController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            isHolding = true;
+            anim.SetBool("IsAimToThrow", true);
             ShowTrack();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            ThrowDisk();
+            isHolding = false;
+            anim.SetBool("IsAimToThrow", false);
+            anim.SetTrigger("Throw");
+            //ThrowDisk();
         }
+
+        UpdateFirePointTransform();
+    }
+
+    public void OnThrowAnimationEnd()
+    {
+        Debug.Log("HEllo!");
+        ThrowDisk();
+    }
+
+    private void UpdateFirePointTransform()
+    {
+        firePoint.position = handBone.position;
+        firePoint.rotation = handBone.rotation;
     }
 
     private void ThrowDisk()
