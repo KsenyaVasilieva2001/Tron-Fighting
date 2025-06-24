@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//¬ынести логику анимаций в другой класс
+
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour
 {
@@ -25,6 +28,8 @@ public class CharacterMovement : MonoBehaviour
 
     private CharacterController controller;
     private float verticalVelocity;
+
+    [SerializeField] private float runSpeed = 3f;
 
     void Start()
     {
@@ -60,7 +65,7 @@ public class CharacterMovement : MonoBehaviour
     {
         Vector3 move = targetDirection.normalized;
         move = UseGravity(move);
-        controller.Move(move * Time.deltaTime * 2);
+        controller.Move(move * Time.deltaTime * runSpeed);
     }
 
     private void Jump()
@@ -76,6 +81,7 @@ public class CharacterMovement : MonoBehaviour
         speed = Mathf.SmoothDamp(anim.GetFloat("Speed"), speed, ref velocity, 0.1f);
         Debug.Log("Speed: " + speed);
         anim.SetFloat("Speed", speed);
+        //anim.speed = runSpeed;
     }
 
     private void GetInput()
