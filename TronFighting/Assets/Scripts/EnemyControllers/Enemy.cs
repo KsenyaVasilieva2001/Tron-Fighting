@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyData data;
     public int currentHealth;
-    public MeshCollider meshCollider;
+    public Collider collider;
 
     private void Start()
     {
