@@ -30,7 +30,7 @@ public class FightController : MonoBehaviour
     bool skip; 
 
     [Header("Components")]
-    Animator animator; //добавить аниматор игрока или кого-там
+    [SerializeField] private Animator animator;
 
     private void Start()
     {

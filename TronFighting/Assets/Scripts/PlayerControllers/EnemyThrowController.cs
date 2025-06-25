@@ -35,6 +35,5 @@ public class EnemyThrowController : ThrowControllerBase
         Vector3 direction = (target.position - firePoint.position).normalized;
         RotateTowards(direction);
         path = pathTracker.CalculatePath(firePoint.position, direction, reflections, maxDistance);
-        pathTracker.Visualize(path);
     }
 }
