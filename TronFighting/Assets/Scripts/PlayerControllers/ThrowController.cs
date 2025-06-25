@@ -57,8 +57,8 @@ public class ThrowController : MonoBehaviour
 
     private void UpdateFirePointTransform()
     {
-        firePoint.position = handBone.position;
-        firePoint.rotation = handBone.rotation;
+        //firePoint.position = handBone.position;
+        //firePoint.rotation = handBone.rotation;
     }
 
     private void ThrowDisk()
