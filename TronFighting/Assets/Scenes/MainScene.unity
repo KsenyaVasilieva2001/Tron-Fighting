@@ -5738,10 +5738,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973b55fbba780bb448baaf9b9ecb7c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heavyKey: 0
-  lightKey: 0
-  kickKey: 0
-  blockKey: 0
+  heavyKey: 105
+  lightKey: 106
+  kickKey: 107
+  blockKey: 108
   heavyAttack:
     name: hard_attack
     duration: 2.933
@@ -5757,8 +5757,8 @@ MonoBehaviour:
   combos:
   - name: surprise_uppercut
     inputs:
-    - type: 0
     - type: 1
+    - type: 0
     - type: 2
     comboAttack:
       name: surprise_uppercut
@@ -7344,7 +7344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3230848091537742895}
   m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 3.252521, y: 2.2444062, z: 1.4699485}
+  m_LocalPosition: {x: 3.25252, y: 2.2444062, z: 1.4699485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10116,7 +10116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6857278506994090990}
   m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 3.4758322, y: 2.8691359, z: 0.5590449}
+  m_LocalPosition: {x: 3.4758306, y: 2.8691359, z: 0.5590449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

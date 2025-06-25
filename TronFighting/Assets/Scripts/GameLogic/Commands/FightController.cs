@@ -57,7 +57,6 @@ public class FightController : MonoBehaviour
     {
         CheckAttack();
         InputAttack();
-        MoveUpdate();
         KickEnemy();
     }
 
@@ -66,7 +65,9 @@ public class FightController : MonoBehaviour
         ComboInput input = null;
         if (Input.GetKeyDown(heavyKey))
         {
+            Debug.Log("heavy key");
             input = new ComboInput(AttackType.heavy);
+            Debug.Log("heavy key input" + input);
         }
         if (Input.GetKeyDown(lightKey))
         {
@@ -117,13 +118,15 @@ public class FightController : MonoBehaviour
         {
             currentCombos.RemoveAt(i);
         }
+        
 
         if(currentCombos.Count <= 0)
         {
+            Debug.Log("Call attack");
+            Debug.Log(input.type);
             Attack(GetAttackFromType(input.type));
         }
     }
-
 
     public Attack GetAttackFromType(AttackType type)
     {
@@ -173,6 +176,7 @@ public class FightController : MonoBehaviour
             {
                 if(lastInput != null)
                 {
+                    Debug.Log(lastInput.type);
                     Attack(GetAttackFromType(lastInput.type));
                     lastInput = null;
                 }
@@ -183,13 +187,6 @@ public class FightController : MonoBehaviour
         {
             gap = 0;
         }
-    }
-
-    
-    private void MoveUpdate()
-    {
-        MovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        MouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
     }
       
 

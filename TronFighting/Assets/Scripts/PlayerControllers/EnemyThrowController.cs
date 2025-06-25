@@ -16,7 +16,6 @@ public class EnemyThrowController : ThrowControllerBase
         ShowTrack();
         if (timer >= throwInterval)
         {
-            Debug.Log("Enemy");
             timer = 0f;
             StartCoroutine(ThrowRoutine());
         }
