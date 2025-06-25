@@ -8,10 +8,10 @@ public class FightController : MonoBehaviour
     public Vector2 MouseDelta { get; private set; }
 
     [Header("Key inputs")]
-    public KeyCode heavyKey;
-    public KeyCode lightKey;
-    public KeyCode kickKey;
-    public KeyCode blockKey;
+    public KeyCode heavyKey = KeyCode.I;
+    public KeyCode lightKey = KeyCode.J;
+    public KeyCode kickKey = KeyCode.L;
+    public KeyCode blockKey = KeyCode.K;
 
     [Header("Attacks")]
     public Attack heavyAttack;
@@ -190,23 +190,6 @@ public class FightController : MonoBehaviour
     {
         MovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         MouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-        /*
-        Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        if (inputDirection.magnitude > 0)
-        {
-            IControllable moveCommand = new MoveCommand(playerController.movementState, inputDirection);
-            playerController.animator.SetFloat("Speed", inputDirection.magnitude);
-            moveCommand.Execute();
-
-        }
-        else
-        {
-            IControllable moveCommand = new MoveCommand(playerController.movementState, Vector3.zero);
-            playerController.animator.SetFloat("Speed", inputDirection.magnitude);
-            moveCommand.Execute();
-        }
-        */
     }
       
 

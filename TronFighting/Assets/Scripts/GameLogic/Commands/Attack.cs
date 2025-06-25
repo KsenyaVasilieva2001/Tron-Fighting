@@ -13,20 +13,16 @@ public enum AttackType
 
 
 [System.Serializable]
-public class Attack : IControllable
+public class Attack
 {
     public string name;
-    public float duration; // продолжительность анимации
-
-    public void Execute()
-    {
-
-    }
+    public float duration; 
 }
 
 [System.Serializable]
 public class Combo
 {
+    public string name;
     public List<ComboInput> inputs;
     public Attack comboAttack;
     public UnityEvent onInput;
