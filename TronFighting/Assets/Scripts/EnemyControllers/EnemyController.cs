@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public static event Action OnActivateThrow;
-    public static event Action OnDeactivateThrow;
-    public static event Action OnActivateFight;
-    public static event Action OnDeactivateFight;
+    public event Action OnActivateThrow;
+    public event Action OnDeactivateThrow;
+    public event Action OnActivateFight;
+    public event Action OnDeactivateFight;
 
     private bool isPlayerNear;
     private bool isplayerDetected;
@@ -45,4 +45,5 @@ public class EnemyController : MonoBehaviour
         OnActivateThrow?.Invoke();
         OnDeactivateFight?.Invoke();
     }
+    
 }

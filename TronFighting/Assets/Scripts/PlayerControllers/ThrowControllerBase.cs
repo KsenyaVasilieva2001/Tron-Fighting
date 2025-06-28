@@ -14,7 +14,7 @@ public abstract class ThrowControllerBase : MonoBehaviour
     protected DiskFactory _diskFactory;
     protected Vector3[] path;
 
-    protected bool isEnable;
+    [SerializeField] protected bool isEnable = true;
 
     protected virtual void Start()
     {
@@ -43,11 +43,13 @@ public abstract class ThrowControllerBase : MonoBehaviour
     protected abstract void ShowTrack();
     protected void Activate()
     {
+        Debug.Log("Activate throw");
         isEnable = true;
     }
 
     public void Deactivate()
     {
+        Debug.Log("Deactivate throw");
         isEnable = false;
     }
 

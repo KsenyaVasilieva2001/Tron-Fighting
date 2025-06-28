@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void React()
     {
-        throw new System.NotImplementedException();
     }
 
     public void TakeDamage(int amount)

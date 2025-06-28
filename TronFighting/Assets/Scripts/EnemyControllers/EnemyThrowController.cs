@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyController))]
 public class EnemyThrowController : ThrowControllerBase
 {
     [SerializeField] private Transform target;
     [SerializeField] private float throwInterval = 3f;
+    [SerializeField] private EnemyController enemyController;
     private float timer;
 
     protected override void Start()
     {
         base.Start();
-        EnemyController.OnActivateFight += Activate;
-        EnemyController.OnDeactivateThrow += Deactivate;
+        enemyController.OnActivateThrow += Activate;
+        enemyController.OnDeactivateThrow += Deactivate;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        ShowTrack();
-        if (timer >= throwInterval)
+        if (IsActive())
         {
-            timer = 0f;
-            StartCoroutine(ThrowRoutine());
+            timer += Time.deltaTime;
+            ShowTrack();
+            if (timer >= throwInterval)
+            {
+                timer = 0f;
+                StartCoroutine(ThrowRoutine());
+            }
         }
     }
     private IEnumerator ThrowRoutine()
@@ -43,7 +48,7 @@ public class EnemyThrowController : ThrowControllerBase
 
     void OnDestroy()
     {
-        EnemyController.OnActivateFight -= Activate;
-        EnemyController.OnDeactivateThrow -= Deactivate;
+        enemyController.OnActivateThrow -= Activate;
+        enemyController.OnDeactivateThrow -= Deactivate;
     }
 }

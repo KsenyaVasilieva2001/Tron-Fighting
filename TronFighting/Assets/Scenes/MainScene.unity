@@ -3979,8 +3979,10 @@ MonoBehaviour:
   diskPrefab: {fileID: 3744872701780373281, guid: 51598e7fb1597cc4d93fd445bfafb21d, type: 3}
   anim: {fileID: 1355732921}
   handBone: {fileID: 1928601453}
+  isEnable: 1
   target: {fileID: 543450653314281004}
   throwInterval: 3
+  enemyController: {fileID: 1355732925}
 --- !u!114 &1355732925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3990,7 +3992,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355732915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218d3f788074b4747a041b50b12ad02d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aae98a169798754582cfa02f76492f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   areaRadius: 2.5
@@ -5689,6 +5691,7 @@ MonoBehaviour:
   diskPrefab: {fileID: 3744872701780373281, guid: 411f9623067e5ce408efebbdea684f2c, type: 3}
   anim: {fileID: 919132149581362327}
   handBone: {fileID: 1852576806659880463}
+  isEnable: 1
   playerCamera: {fileID: 3230848091537742892}
 --- !u!114 &919132149581362329
 MonoBehaviour:
