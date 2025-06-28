@@ -14,6 +14,8 @@ public abstract class ThrowControllerBase : MonoBehaviour
     protected DiskFactory _diskFactory;
     protected Vector3[] path;
 
+    protected bool isEnable;
+
     protected virtual void Start()
     {
         _diskFactory = new DiskFactory(diskPrefab);
@@ -39,10 +41,26 @@ public abstract class ThrowControllerBase : MonoBehaviour
     }
 
     protected abstract void ShowTrack();
+    protected void Activate()
+    {
+        isEnable = true;
+    }
+
+    public void Deactivate()
+    {
+        isEnable = false;
+    }
+
+    public bool IsActive()
+    {
+        return isEnable;
+    }
 
     protected void UpdateFirePointTransform()
     {
         //firePoint.position = handBone.position;
         //firePoint.rotation = handBone.rotation;
     }
+
+
 }

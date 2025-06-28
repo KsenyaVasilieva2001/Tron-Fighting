@@ -7,11 +7,16 @@ public class EnemyThrowController : ThrowControllerBase
     [SerializeField] private Transform target;
     [SerializeField] private float throwInterval = 3f;
     private float timer;
-    private Vector3 direction;
+
+    protected override void Start()
+    {
+        base.Start();
+        EnemyController.OnActivateFight += Activate;
+        EnemyController.OnDeactivateThrow += Deactivate;
+    }
 
     private void Update()
     {
-
         timer += Time.deltaTime;
         ShowTrack();
         if (timer >= throwInterval)
@@ -34,5 +39,11 @@ public class EnemyThrowController : ThrowControllerBase
         Vector3 direction = (target.position - firePoint.position).normalized;
         RotateTowards(direction);
         path = pathTracker.CalculatePath(firePoint.position, direction, reflections, maxDistance);
+    }
+
+    void OnDestroy()
+    {
+        EnemyController.OnActivateFight -= Activate;
+        EnemyController.OnDeactivateThrow -= Deactivate;
     }
 }

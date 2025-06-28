@@ -65,9 +65,7 @@ public class FightController : MonoBehaviour
         ComboInput input = null;
         if (Input.GetKeyDown(heavyKey))
         {
-            Debug.Log("heavy key");
             input = new ComboInput(AttackType.heavy);
-            Debug.Log("heavy key input" + input);
         }
         if (Input.GetKeyDown(lightKey))
         {

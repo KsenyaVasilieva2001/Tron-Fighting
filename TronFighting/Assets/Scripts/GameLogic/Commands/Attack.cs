@@ -16,7 +16,8 @@ public enum AttackType
 public class Attack
 {
     public string name;
-    public float duration; 
+    public float duration;
+    public float weight;
 }
 
 [System.Serializable]
