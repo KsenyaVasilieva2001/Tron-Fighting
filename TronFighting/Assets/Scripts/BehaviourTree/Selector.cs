@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Selector : MonoBehaviour
+namespace BehaviorTree
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Selector : Node
     {
-        
-    }
+        public Selector() : base() { }
+        public Selector(List<Node> children) : base(children) { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override NodeState Evaluate()
+        {
+            foreach (Node node in children)
+            {
+                switch (node.Evaluate())
+                {
+                    case NodeState.FAILURE:
+                        continue;
+                    case NodeState.SUCCESS:
+                        state = NodeState.SUCCESS;
+                        return state;
+                    case NodeState.RUNNING:
+                        state = NodeState.RUNNING;
+                        return state;
+                    default:
+                        continue;
+                }
+            }
+            state = NodeState.FAILURE;
+            return state;
+        }
     }
 }
