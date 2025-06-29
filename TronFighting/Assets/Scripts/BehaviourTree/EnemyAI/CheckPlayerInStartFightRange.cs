@@ -11,13 +11,7 @@ public class CheckPlayerInStartFightRange : Node
 
     private Transform _transform;
 
-    public event Action OnActivateThrow;
-    public event Action OnDeactivateThrow;
-    public event Action OnActivateFight;
-    public event Action OnDeactivateFight;
-
     private bool isPlayerNear;
-    private bool isplayerDetected;
 
     public CheckPlayerInStartFightRange(EnemyBT enemy)
     {
