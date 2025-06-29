@@ -14,25 +14,20 @@ public class EnemyBT : Tree
         {
             new Sequence(new List<Node>
             {
-                new CheckPlayerInStartFightRange(),
-                new CheckPlayerInAttackRange(),
+                new CheckPlayerInStartFightRange(transform),
+                new CheckPlayerInAttackRange(transform),
                 new CheckPlayerIsAttacking(),
                 new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
-                new CheckPlayerInStartFightRange(),
-                new CheckPlayerInAttackRange(),
+                new CheckPlayerInStartFightRange(transform),
+                new CheckPlayerInAttackRange(transform),
                 new ConditionPlayerIsOpen(),
                 new ActionAttack()
             }),
-            new Sequence(new List<Node>
-            {
-                new CheckPlayerInStartFightRange(),
-            }),
             new ActionThrowDisk(),
         });
-
         return root;
     }
 }
