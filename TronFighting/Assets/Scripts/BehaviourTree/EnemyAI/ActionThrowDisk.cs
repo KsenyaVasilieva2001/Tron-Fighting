@@ -1,5 +1,6 @@
 ﻿using BehaviorTree;
 
-internal class ActionThrowDisk : Node
+public class ActionThrowDisk : Node
 {
+
 }

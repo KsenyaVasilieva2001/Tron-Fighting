@@ -9,7 +9,6 @@ public class CheckPlayerInStartFightRange : Node
     private static LayerMask playerLayer;
 
     private Transform _transform;
-    private Animator _animator;
 
     public event Action OnActivateThrow;
     public event Action OnDeactivateThrow;
@@ -22,12 +21,13 @@ public class CheckPlayerInStartFightRange : Node
     public CheckPlayerInStartFightRange(Transform transform)
     {
         _transform = transform;
-        _animator = transform.GetComponent<Animator>();
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     public override NodeState Evaluate()
     {
         object t = GetData("target");
+
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(
@@ -36,26 +36,55 @@ public class CheckPlayerInStartFightRange : Node
             if (colliders.Length > 0)
             {
                 parent.parent.SetData("target", colliders[0].transform);
-                if (isplayerDetected && !isPlayerNear)
+                if (!isPlayerNear)
                 {
                     isPlayerNear = true;
                     OnPlayerEnterFightZone();
                 }
-                else if (!isplayerDetected && isPlayerNear)
+                state = NodeState.SUCCESS;
+                return state;
+            }
+            else
+            {
+                if (isPlayerNear)
                 {
                     isPlayerNear = false;
                     OnPlayerExitFightZone();
                 }
+                state = NodeState.FAILURE;
+                return state;
+            }
+        }
+        else
+        {
+            Transform player = (Transform)t;
+            float distance = Vector3.Distance(_transform.position, player.position);
+
+            if (distance > EnemyBT.startFightRange)
+            {
+                parent.parent.ClearData("target");
+
+                if (isPlayerNear)
+                {
+                    isPlayerNear = false;
+                    OnPlayerExitFightZone();
+                }
+
+                state = NodeState.FAILURE;
+                return state;
+            }
+            else
+            {
+                if (!isPlayerNear)
+                {
+                    isPlayerNear = true;
+                    OnPlayerEnterFightZone();
+                }
+
                 state = NodeState.SUCCESS;
                 return state;
             }
-
-            state = NodeState.FAILURE;
-            return state;
         }
-
-        state = NodeState.SUCCESS;
-        return state;
     }
 
     void OnPlayerEnterFightZone()

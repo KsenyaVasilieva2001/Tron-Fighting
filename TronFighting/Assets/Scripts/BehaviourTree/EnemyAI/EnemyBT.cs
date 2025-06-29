@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyBT : Tree
 {
-    public static float startFightRange = 6f;
+    public static float startFightRange = 2.5f;
     public static float attackRange = 1f;
     protected override Node SetupTree()
     {
@@ -16,15 +16,15 @@ public class EnemyBT : Tree
             {
                 new CheckPlayerInStartFightRange(transform),
                 new CheckPlayerInAttackRange(transform),
-                new CheckPlayerIsAttacking(),
-                new ActionBlock()
+                //new CheckPlayerIsAttacking(),
+                //new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(transform),
                 new CheckPlayerInAttackRange(transform),
-                new ConditionPlayerIsOpen(),
-                new ActionAttack()
+                //new ConditionPlayerIsOpen(),
+                //new ActionAttack()
             }),
             new ActionThrowDisk(),
         });
