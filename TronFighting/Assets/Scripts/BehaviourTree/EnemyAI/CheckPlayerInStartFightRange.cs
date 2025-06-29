@@ -36,22 +36,8 @@ public class CheckPlayerInStartFightRange : Node
             if (colliders.Length > 0)
             {
                 parent.parent.SetData("target", colliders[0].transform);
-                if (!isPlayerNear)
-                {
-                    isPlayerNear = true;
-                    OnPlayerEnterFightZone();
-                }
+                OnPlayerEnterFightZone();
                 state = NodeState.SUCCESS;
-                return state;
-            }
-            else
-            {
-                if (isPlayerNear)
-                {
-                    isPlayerNear = false;
-                    OnPlayerExitFightZone();
-                }
-                state = NodeState.FAILURE;
                 return state;
             }
         }
@@ -63,28 +49,13 @@ public class CheckPlayerInStartFightRange : Node
             if (distance > EnemyBT.startFightRange)
             {
                 parent.parent.ClearData("target");
-
-                if (isPlayerNear)
-                {
-                    isPlayerNear = false;
-                    OnPlayerExitFightZone();
-                }
-
+                OnPlayerExitFightZone();
                 state = NodeState.FAILURE;
                 return state;
             }
-            else
-            {
-                if (!isPlayerNear)
-                {
-                    isPlayerNear = true;
-                    OnPlayerEnterFightZone();
-                }
-
-                state = NodeState.SUCCESS;
-                return state;
-            }
         }
+        state = NodeState.SUCCESS;
+        return state;
     }
 
     void OnPlayerEnterFightZone()
