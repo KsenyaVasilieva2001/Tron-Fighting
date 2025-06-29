@@ -7,6 +7,7 @@ using UnityEngine;
 public class CheckPlayerInStartFightRange : Node
 {
     private static LayerMask playerLayer;
+    private EnemyBT _enemy;
 
     private Transform _transform;
 
@@ -18,9 +19,10 @@ public class CheckPlayerInStartFightRange : Node
     private bool isPlayerNear;
     private bool isplayerDetected;
 
-    public CheckPlayerInStartFightRange(Transform transform)
+    public CheckPlayerInStartFightRange(EnemyBT enemy)
     {
-        _transform = transform;
+        _enemy = enemy;
+        _transform = enemy.transform;
         playerLayer = LayerMask.GetMask("Player");
     }
 
@@ -36,9 +38,23 @@ public class CheckPlayerInStartFightRange : Node
             if (colliders.Length > 0)
             {
                 parent.parent.SetData("target", colliders[0].transform);
-                OnPlayerEnterFightZone();
+
+                if (!isPlayerNear)
+                {
+                    isPlayerNear = true;
+                    _enemy.OnPlayerEnterFightZone();
+                }
+
                 state = NodeState.SUCCESS;
                 return state;
+            }
+            else
+            {
+                if (isPlayerNear)
+                {
+                    isPlayerNear = false;
+                    _enemy.OnPlayerExitFightZone();
+                }
             }
         }
         else
@@ -49,27 +65,27 @@ public class CheckPlayerInStartFightRange : Node
             if (distance > EnemyBT.startFightRange)
             {
                 parent.parent.ClearData("target");
-                OnPlayerExitFightZone();
+
+                if (isPlayerNear)
+                {
+                    isPlayerNear = false;
+                    _enemy.OnPlayerExitFightZone();
+                }
+
                 state = NodeState.FAILURE;
                 return state;
             }
+            else
+            {
+                if (!isPlayerNear)
+                {
+                    isPlayerNear = true;
+                    _enemy.OnPlayerEnterFightZone();
+                }
+            }
         }
+
         state = NodeState.SUCCESS;
         return state;
     }
-
-    void OnPlayerEnterFightZone()
-    {
-        Debug.Log("Игрок вошел в радиус врага");
-        OnActivateFight?.Invoke();
-        OnDeactivateThrow?.Invoke();
-    }
-
-    void OnPlayerExitFightZone()
-    {
-        Debug.Log("Игрок покинул радиус врага");
-        OnActivateThrow?.Invoke();
-        OnDeactivateFight?.Invoke();
-    }
-
 }

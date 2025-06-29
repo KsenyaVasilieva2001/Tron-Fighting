@@ -7,6 +7,7 @@ public class EnemyBT : Tree
 {
     public static float startFightRange = 2.5f;
     public static float attackRange = 1f;
+    public bool isPlayerNear = false;
     protected override Node SetupTree()
     {
         Node root = 
@@ -14,14 +15,14 @@ public class EnemyBT : Tree
         {
             new Sequence(new List<Node>
             {
-                new CheckPlayerInStartFightRange(transform),
+                new CheckPlayerInStartFightRange(this),
                 new CheckPlayerInAttackRange(transform),
                 //new CheckPlayerIsAttacking(),
                 //new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
-                new CheckPlayerInStartFightRange(transform),
+                new CheckPlayerInStartFightRange(this),
                 new CheckPlayerInAttackRange(transform),
                 //new ConditionPlayerIsOpen(),
                 //new ActionAttack()
@@ -29,5 +30,23 @@ public class EnemyBT : Tree
             new ActionThrowDisk(),
         });
         return root;
+    }
+
+    public void OnPlayerEnterFightZone()
+    {
+        if (!isPlayerNear)
+        {
+            isPlayerNear = true;
+            Debug.Log("Игрок вошел в радиус врага");
+        }
+    }
+
+    public void OnPlayerExitFightZone()
+    {
+        if (isPlayerNear)
+        {
+            isPlayerNear = false;
+            Debug.Log("Игрок покинул радиус врага");
+        }
     }
 }

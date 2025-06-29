@@ -19,7 +19,6 @@ public class CheckPlayerInAttackRange : Node
         object t = GetData("target");
         if (t == null)
         {
-            Debug.Log("In evaluate check");
             state = NodeState.FAILURE;
             return state;
         }
