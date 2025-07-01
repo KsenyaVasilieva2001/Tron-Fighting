@@ -4021,13 +4021,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355732915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973b55fbba780bb448baaf9b9ecb7c60, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ea4adabe4749c47bfdf5e575c78200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heavyKey: 105
-  lightKey: 106
-  kickKey: 107
-  blockKey: 108
   heavyAttack:
     name: hard_attack
     duration: 2.933
@@ -4039,7 +4035,7 @@ MonoBehaviour:
   kickAttack:
     name: kick
     duration: 2.167
-    weight: 1
+    weight: 0
   block:
     name: block
     duration: 1.6
@@ -4071,7 +4067,6 @@ MonoBehaviour:
         m_Calls: []
   currentCombos: 
   comboGap: 0.2
-  animator: {fileID: 1355732921}
 --- !u!1 &1369983452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5718,6 +5713,7 @@ GameObject:
   - component: {fileID: 919132149581362331}
   - component: {fileID: 919132149581362330}
   - component: {fileID: 919132149581362332}
+  - component: {fileID: 919132149581362333}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -5831,10 +5827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973b55fbba780bb448baaf9b9ecb7c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heavyKey: 105
-  lightKey: 106
-  kickKey: 107
-  blockKey: 108
   heavyAttack:
     name: hard_attack
     duration: 2.933
@@ -5878,7 +5870,22 @@ MonoBehaviour:
         m_Calls: []
   currentCombos: 
   comboGap: 0.2
-  animator: {fileID: 919132149581362327}
+  heavyKey: 105
+  lightKey: 106
+  kickKey: 107
+  blockKey: 108
+--- !u!114 &919132149581362333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149581362326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151defa26f4302143bc67c8d91be103b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &946422371312985378
 Transform:
   m_ObjectHideFlags: 0

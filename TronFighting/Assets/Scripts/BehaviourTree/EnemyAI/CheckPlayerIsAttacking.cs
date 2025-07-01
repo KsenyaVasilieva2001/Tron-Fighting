@@ -18,7 +18,7 @@ public class CheckPlayerIsAttacking : Node
         }
 
         Transform player = (Transform)target;
-        FightController playerFight = player.GetComponent<FightController>();
+        PlayerFightController playerFight = player.GetComponent<PlayerFightController>();
 
         if (playerFight != null && playerFight.IsAttacking())
         {

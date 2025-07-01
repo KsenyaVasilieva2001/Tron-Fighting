@@ -4,14 +4,14 @@ using UnityEngine;
 public class ActionAttack : Node
 {
     private EnemyBT _enemy;
-    private FightController _fightController;
+    private FightControllerBase _fightController;
     private float _attackInterval = 2f;
     private float _timer;
 
     public ActionAttack(EnemyBT enemy)
     {
         _enemy = enemy;
-        _fightController = enemy.GetComponent<FightController>();
+        _fightController = enemy.GetComponent<EnemyFightController>();
     }
 
     public override NodeState Evaluate()

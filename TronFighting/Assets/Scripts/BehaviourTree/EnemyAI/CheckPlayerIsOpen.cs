@@ -18,10 +18,11 @@ public class CheckPlayerIsOpen : Node
         }
 
         Transform player = (Transform)target;
-        FightController playerFight = player.GetComponent<FightController>();
+        PlayerFightController playerFight = player.GetComponent<PlayerFightController>();
 
         if (playerFight != null && !playerFight.IsBlocking())
         {
+            Debug.Log("Player is open");
             state = NodeState.SUCCESS;
             return state;
         }

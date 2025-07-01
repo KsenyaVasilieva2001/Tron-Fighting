@@ -37,14 +37,12 @@ public class EnemyBT : Tree
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(this),
-                new CheckPlayerInAttackRange(transform),
                 new CheckPlayerIsAttacking(),
                 new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(this),
-                new CheckPlayerInAttackRange(transform),
                 new CheckPlayerIsOpen(),
                 new ActionAttack(this)
             }),

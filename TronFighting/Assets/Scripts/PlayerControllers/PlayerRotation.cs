@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(FightController))]
+[RequireComponent(typeof(PlayerFightController))]
 public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private float turnSpeed = 10f;
-    private FightController input;
+    private InputHandler input;
     [SerializeField] private Transform playerCameraTransform;
 
     void Awake()
     {
-        input = GetComponent<FightController>();
+        input = GetComponent<InputHandler>();
     }
 
     public void Rotate()
