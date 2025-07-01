@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    /*
     public event Action OnActivateThrow;
     public event Action OnDeactivateThrow;
     public event Action OnActivateFight;
@@ -45,5 +46,5 @@ public class EnemyController : MonoBehaviour
         OnActivateThrow?.Invoke();
         OnDeactivateFight?.Invoke();
     }
-    
+    */
 }

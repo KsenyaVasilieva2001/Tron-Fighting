@@ -52,12 +52,10 @@ public class FightController : MonoBehaviour
         }
     }
 
-    [SerializeField] private PlayerController playerController;
     void Update()
     {
         CheckAttack();
         InputAttack();
-        KickEnemy();
     }
 
     private void InputAttack()
@@ -126,6 +124,15 @@ public class FightController : MonoBehaviour
         }
     }
 
+    public bool IsAttacking()
+    {
+        return currAttack != null && currAttack != block;
+    }
+    public bool IsBlocking()
+    {
+        return currAttack == block;
+    }
+
     public Attack GetAttackFromType(AttackType type)
     {
         if (type == AttackType.heavy) return heavyAttack;
@@ -134,7 +141,7 @@ public class FightController : MonoBehaviour
         if (type == AttackType.block) return block;
         return null;
     }
-    private void Attack(Attack attack)
+    public void Attack(Attack attack)
     {
         currAttack = attack;
         timer = attack.duration;
@@ -187,15 +194,6 @@ public class FightController : MonoBehaviour
         }
     }
       
-
-    private void KickEnemy()
-    {
-        if (playerController.currentEnemy != null && Input.GetKeyDown(KeyCode.Space))
-        {
-            playerController.currentEnemy.TakeDamage(1);
-            playerController.uiController.UpdateEnemyHealth(playerController.currentEnemy.currentHealth, playerController.currentEnemy.data.maxHealth);
-        }
-    }
 }
 
 

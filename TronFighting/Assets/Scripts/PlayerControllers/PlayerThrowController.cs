@@ -30,7 +30,7 @@ public class PlayerThrowController : ThrowControllerBase
         UpdateFirePointTransform();
     }
 
-    protected override void ShowTrack()
+    public override void ShowTrack()
     {
         mousePosition = Input.mousePosition;
         cameraRay = playerCamera.ScreenPointToRay(mousePosition);

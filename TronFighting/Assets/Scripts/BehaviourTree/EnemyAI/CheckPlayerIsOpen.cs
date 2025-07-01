@@ -1,10 +1,10 @@
 ﻿using BehaviorTree;
 using UnityEngine;
 
-public class CheckPlayerIsAttacking : Node
+public class CheckPlayerIsOpen : Node
 {
 
-    public CheckPlayerIsAttacking()
+    public CheckPlayerIsOpen()
     {
     }
 
@@ -20,7 +20,7 @@ public class CheckPlayerIsAttacking : Node
         Transform player = (Transform)target;
         FightController playerFight = player.GetComponent<FightController>();
 
-        if (playerFight != null && playerFight.IsAttacking())
+        if (playerFight != null && !playerFight.IsBlocking())
         {
             state = NodeState.SUCCESS;
             return state;

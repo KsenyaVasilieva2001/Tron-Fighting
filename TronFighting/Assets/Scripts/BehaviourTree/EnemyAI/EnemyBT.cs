@@ -3,20 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+public enum EnemyState
+{
+    THROW,
+    WAIT_FOR_ATTACK,
+    ATTACK
+}
+*/
+
 public class EnemyBT : Tree
 {
     public static float startFightRange = 2.5f;
     public static float attackRange = 1f;
     public bool isPlayerNear = false;
     public Animator anim;
+    public EnemyThrowController throwController;
+
+   //s public EnemyState state = EnemyState.THROW;
 
     protected override void Start()
     {
-        base.Start();
         anim = GetComponent<Animator>();
+        throwController = GetComponent<EnemyThrowController>();
+        base.Start();
     }
     protected override Node SetupTree()
     {
+        Debug.Log(throwController);
         Node root = 
         new Selector(new List<Node>
         {
@@ -24,17 +38,17 @@ public class EnemyBT : Tree
             {
                 new CheckPlayerInStartFightRange(this),
                 new CheckPlayerInAttackRange(transform),
-                //new CheckPlayerIsAttacking(),
-                //new ActionBlock()
+                new CheckPlayerIsAttacking(),
+                new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(this),
                 new CheckPlayerInAttackRange(transform),
-                //new ConditionPlayerIsOpen(),
-                //new ActionAttack()
+                new CheckPlayerIsOpen(),
+                new ActionAttack(this)
             }),
-            new ActionThrowDisk(),
+            //new ActionThrowDisk(throwController),
         });
         return root;
     }

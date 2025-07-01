@@ -13,23 +13,15 @@ public class EnemyThrowController : ThrowControllerBase
     protected override void Start()
     {
         base.Start();
-        enemyController.OnActivateThrow += Activate;
-        enemyController.OnDeactivateThrow += Deactivate;
+       // enemyController.OnActivateThrow += Activate;
+      //  enemyController.OnDeactivateThrow += Deactivate;
     }
 
-    private void Update()
+    public void StartThrow()
     {
-        if (IsActive())
-        {
-            timer += Time.deltaTime;
-            ShowTrack();
-            if (timer >= throwInterval)
-            {
-                timer = 0f;
-                StartCoroutine(ThrowRoutine());
-            }
-        }
+        StartCoroutine(ThrowRoutine());
     }
+
     private IEnumerator ThrowRoutine()
     {
         anim.SetBool("IsAimToThrow", true);
@@ -39,7 +31,7 @@ public class EnemyThrowController : ThrowControllerBase
         anim.SetBool("IsAimToThrow", false);
         pathTracker.Clear();
     }
-    protected override void ShowTrack()
+    public override void ShowTrack()
     {
         Vector3 direction = (target.position - firePoint.position).normalized;
         RotateTowards(direction);
@@ -48,7 +40,7 @@ public class EnemyThrowController : ThrowControllerBase
 
     void OnDestroy()
     {
-        enemyController.OnActivateThrow -= Activate;
-        enemyController.OnDeactivateThrow -= Deactivate;
+       // enemyController.OnActivateThrow -= Activate;
+      //  enemyController.OnDeactivateThrow -= Deactivate;
     }
 }

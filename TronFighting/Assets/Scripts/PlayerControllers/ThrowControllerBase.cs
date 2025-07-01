@@ -40,7 +40,7 @@ public abstract class ThrowControllerBase : MonoBehaviour
         ThrowDisk();
     }
 
-    protected abstract void ShowTrack();
+    public abstract void ShowTrack();
     protected void Activate()
     {
         Debug.Log("Activate throw");

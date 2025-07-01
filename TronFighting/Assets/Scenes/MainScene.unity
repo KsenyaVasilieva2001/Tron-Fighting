@@ -3882,6 +3882,7 @@ GameObject:
   - component: {fileID: 1355732924}
   - component: {fileID: 1355732925}
   - component: {fileID: 1355732926}
+  - component: {fileID: 1355732927}
   m_Layer: 0
   m_Name: YellowEnemy
   m_TagString: Untagged
@@ -3968,7 +3969,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355732915}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29127b02c6f92a24fb202b06232871b4, type: 3}
   m_Name: 
@@ -3991,15 +3992,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355732915}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aae98a169798754582cfa02f76492f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaRadius: 2.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &1355732926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4012,6 +4009,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ba32afe8be6044d8b4ae2328fb5f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerNear: 0
+  anim: {fileID: 0}
+  throwController: {fileID: 0}
+--- !u!114 &1355732927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355732915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973b55fbba780bb448baaf9b9ecb7c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heavyKey: 105
+  lightKey: 106
+  kickKey: 107
+  blockKey: 108
+  heavyAttack:
+    name: hard_attack
+    duration: 2.933
+    weight: 3
+  lightAttack:
+    name: light_attack
+    duration: 3.033
+    weight: 2
+  kickAttack:
+    name: kick
+    duration: 2.167
+    weight: 1
+  block:
+    name: block
+    duration: 1.6
+    weight: 0
+  combos:
+  - name: surprise_uppercut
+    inputs:
+    - type: 1
+    - type: 0
+    - type: 2
+    comboAttack:
+      name: surprise_uppercut
+      duration: 3.5
+      weight: 5
+    onInput:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: elbow_uppercut
+    inputs:
+    - type: 0
+    - type: 0
+    - type: 0
+    comboAttack:
+      name: elbow_uppercut
+      duration: 2.3
+      weight: 7
+    onInput:
+      m_PersistentCalls:
+        m_Calls: []
+  currentCombos: 
+  comboGap: 0.2
+  animator: {fileID: 1355732921}
 --- !u!1 &1369983452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,7 +5879,6 @@ MonoBehaviour:
   currentCombos: 
   comboGap: 0.2
   animator: {fileID: 919132149581362327}
-  playerController: {fileID: 919132149581362329}
 --- !u!4 &946422371312985378
 Transform:
   m_ObjectHideFlags: 0
@@ -7383,7 +7442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3230848091537742895}
   m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 3.2525897, y: 2.2444062, z: 1.4699485}
+  m_LocalPosition: {x: 3.2523768, y: 2.2444062, z: 1.4699485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10155,7 +10214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6857278506994090990}
   m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 3.4759617, y: 2.8691359, z: 0.5590449}
+  m_LocalPosition: {x: 3.4755611, y: 2.8691359, z: 0.5590449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
