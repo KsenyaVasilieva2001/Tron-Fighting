@@ -13,15 +13,12 @@ public class Health : MonoBehaviour, IHealth
     public event Action OnDeath;
     public event Action<float> OnHealthChanged;
 
+
     void Awake()
     {
         CurrentHealth = _maxHealth;
     }
 
-    void Update()
-    {
-        Debug.Log(this.gameObject.name + ": " + CurrentHealth);
-    }
     public void Heal(float hp)
     {
         CurrentHealth += hp;

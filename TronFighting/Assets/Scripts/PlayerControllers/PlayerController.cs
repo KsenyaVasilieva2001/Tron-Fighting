@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public UIController uiController;
     public EnemyBT currentEnemy;
     public bool IsInFightZone;
 
