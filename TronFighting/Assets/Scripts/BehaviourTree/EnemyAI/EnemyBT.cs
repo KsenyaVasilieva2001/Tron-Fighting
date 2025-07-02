@@ -1,4 +1,5 @@
 using BehaviorTree;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,6 @@ public class EnemyBT : Tree
     public Animator anim;
     public EnemyThrowController throwController;
 
-   //s public EnemyState state = EnemyState.THROW;
 
     protected override void Start()
     {
@@ -60,7 +60,7 @@ public class EnemyBT : Tree
         {
             anim.Play("fight_idle");
             isPlayerNear = true;
-            Debug.Log("Игрок вошел в радиус врага");
+            GlobalEvents.OnPlayerEnterFightZone?.Invoke(this);
         }
     }
 
@@ -70,7 +70,7 @@ public class EnemyBT : Tree
         {
             anim.Play("idle");
             isPlayerNear = false;
-            Debug.Log("Игрок покинул радиус врага");
+            GlobalEvents.OnPlayerExitFightZone?.Invoke(this);
         }
     }
 

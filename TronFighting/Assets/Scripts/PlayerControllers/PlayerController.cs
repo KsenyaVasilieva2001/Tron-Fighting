@@ -8,30 +8,21 @@ public class PlayerController : MonoBehaviour
     public UIController uiController;
     public Enemy currentEnemy;
 
-    private PlayerMovement movement;
-    private PlayerRotation rotation;
-
-    //  public MovementState movementState;
-
-    [SerializeField] private float moveSpeed;
-
-    void Awake()
-    {
-        movement = GetComponent<PlayerMovement>();
-        rotation = GetComponent<PlayerRotation>();
-    }
-
     void Start()
     {
-        // movementState = new MovementState(transform, moveSpeed);
         animator = GetComponent<Animator>();
-        // SwitchState(movementState);
+        GlobalEvents.OnPlayerEnterFightZone += PlayFightAnim;
+        GlobalEvents.OnPlayerExitFightZone += PlayIdleAnim;
     }
 
-    void FixedUpdate()
+    public void PlayFightAnim(EnemyBT enemy)
     {
-      // movement.Move();
-       //rotation.Rotate();
+        animator.Play("fight_idle");
+    }
+
+    public void PlayIdleAnim(EnemyBT enemy)
+    {
+        animator.Play("idle");
     }
 
     private void OnTriggerEnter(Collider other)

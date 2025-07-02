@@ -36,6 +36,7 @@ public class CheckPlayerInStartFightRange : Node
                 if (!isPlayerNear)
                 {
                     isPlayerNear = true;
+                    
                     _enemy.OnPlayerEnterFightZone();
                 }
 
