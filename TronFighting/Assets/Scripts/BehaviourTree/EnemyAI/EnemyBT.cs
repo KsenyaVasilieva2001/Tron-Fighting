@@ -28,6 +28,7 @@ public class EnemyBT : Tree
         throwController = GetComponent<EnemyThrowController>();
         base.Start();
     }
+
     protected override Node SetupTree()
     {
         Debug.Log(throwController);
@@ -37,16 +38,18 @@ public class EnemyBT : Tree
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(this),
+                new ActionRotateTowards(this),
                 new CheckPlayerIsAttacking(),
                 new ActionBlock()
             }),
             new Sequence(new List<Node>
             {
                 new CheckPlayerInStartFightRange(this),
+                new ActionRotateTowards(this),
                 new CheckPlayerIsOpen(),
                 new ActionAttack(this)
             }),
-            //new ActionThrowDisk(throwController),
+            new ActionThrowDisk(throwController),
         });
         return root;
     }
@@ -70,4 +73,6 @@ public class EnemyBT : Tree
             Debug.Log("Игрок покинул радиус врага");
         }
     }
+
+
 }
