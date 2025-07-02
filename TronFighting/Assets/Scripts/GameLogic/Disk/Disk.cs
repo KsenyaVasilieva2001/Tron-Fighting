@@ -34,8 +34,8 @@ public class Disk : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var damageable = other.GetComponent<IDamageable>();
-        if (damageable != null)
+        var damageable = other.GetComponent<IHealth>();
+        if (damageable != null && !other.GetComponent<EnemyBT>())
         {
             damageable.TakeDamage(damageAmount);
             Destroy(gameObject);
