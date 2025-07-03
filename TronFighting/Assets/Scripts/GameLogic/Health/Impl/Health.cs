@@ -33,6 +33,7 @@ public class Health : MonoBehaviour, IHealth
         if (CurrentHealth <= 0) return;
 
         CurrentHealth -= hp;
+        Debug.Log("DAMAGE");
         OnHealthChanged?.Invoke(CurrentHealth);
 
         if (CurrentHealth <= 0)

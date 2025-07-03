@@ -86,5 +86,6 @@ public class EnemyBT : Tree
         pos.y -= 100f;
         transform.position = pos;
         GlobalEvents.OnPlayerWin?.Invoke(this);
+        Destroy(gameObject);
     }
 }

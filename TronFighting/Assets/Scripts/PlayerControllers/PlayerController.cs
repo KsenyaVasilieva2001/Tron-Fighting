@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (IsInFightZone) RotateTowards(currentEnemy);
+        if (IsInFightZone && currentEnemy!= null) RotateTowards(currentEnemy);
     }
 
     public void HandleEnterFightZone(EnemyBT enemy)

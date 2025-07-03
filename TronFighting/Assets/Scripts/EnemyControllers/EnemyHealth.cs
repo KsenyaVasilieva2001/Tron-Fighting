@@ -16,8 +16,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Debug.Log("Enemy is Damaged!");
     }
 
-   public void Die()
-   {
-
-   }
+    public void Die()
+    {
+    }
 }
