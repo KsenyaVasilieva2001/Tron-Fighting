@@ -5,7 +5,7 @@ public class ActionAttack : Node
 {
     private EnemyBT _enemy;
     private FightControllerBase _fightController;
-    private float _attackInterval = 2.5f;
+    private float _attackInterval = 4f;
     private float _timer;
 
     public ActionAttack(EnemyBT enemy)

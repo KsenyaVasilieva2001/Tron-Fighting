@@ -15,17 +15,22 @@ public enum EnemyState
 
 public class EnemyBT : Tree
 {
-    public static float startFightRange = 2.5f;
+    public static float startFightRange = 2f;
     public static float attackRange = 1f;
     public bool isPlayerNear = false;
     public Animator anim;
     public EnemyThrowController throwController;
+    public Health health;
 
 
     protected override void Start()
     {
         anim = GetComponent<Animator>();
+        health = GetComponent<Health>();
         throwController = GetComponent<EnemyThrowController>();
+
+        health.OnDeath += HandleDeath;
+
         base.Start();
     }
 
@@ -74,5 +79,12 @@ public class EnemyBT : Tree
         }
     }
 
-
+    private void HandleDeath()
+    {
+        anim.Play("die");
+        Vector3 pos = transform.position;
+        pos.y -= 100f;
+        transform.position = pos;
+        GlobalEvents.OnPlayerWin?.Invoke(this);
+    }
 }

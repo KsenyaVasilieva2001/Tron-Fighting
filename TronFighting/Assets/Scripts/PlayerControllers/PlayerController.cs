@@ -6,13 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public EnemyBT currentEnemy;
+    public Health health;
     public bool IsInFightZone;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        health.OnDeath += HandleDeath;
         GlobalEvents.OnPlayerEnterFightZone += HandleEnterFightZone;
         GlobalEvents.OnPlayerExitFightZone += HandleExitFightZone;
+        GlobalEvents.OnPlayerWin += HandleWin;
     }
 
     private void Update()
@@ -31,6 +35,19 @@ public class PlayerController : MonoBehaviour
     {
         animator.Play("idle");
         IsInFightZone = false;
+    }
+
+    public void HandleWin(EnemyBT enemy)
+    {
+        animator.Play("victory");
+    }
+
+    public void HandleDeath()
+    {
+        animator.Play("die");
+        Vector3 pos = transform.position;
+        pos.y -= 100f;
+        transform.position = pos;
     }
 
     protected void RotateTowards(EnemyBT enemy)
